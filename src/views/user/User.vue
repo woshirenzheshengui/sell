@@ -15,8 +15,8 @@
             
           </el-input>
            <el-button type="primary" @click="onSubmit">查询</el-button>
-           <el-button style="float: right" type="primary" @click="onSubmit">导出全部数据</el-button>
-           <el-button style="float: right" type="primary" @click="onSubmit">新增学员连接</el-button>
+           <el-button  style="float: right" type="primary" @click="onSubmit">导出全部数据</el-button>
+           <el-button @click="add"  style="float: right" type="primary">新增学员连接</el-button>
       </el-col>
     
     </el-row>
@@ -131,7 +131,13 @@ export default {
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
-      }
+      },
+      add(){
+          this.$router.push('/studentconnection?type=add')
+        },
+        edit(index,row){
+          this.$router.push('/studentconnection?type=edit&id='+row.id)
+        },
     }
   
 };

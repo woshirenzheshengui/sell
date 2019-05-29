@@ -42,7 +42,7 @@
             </el-menu-item>
           </el-menu>
           <div class="aside-bottom">
-            <img src="../assets/header.png" class="header-icon" alt="">
+            <img @click="personalCenter" src="../assets/header.png" class="header-icon" alt="">
             <br>
             <span class="user-name">admin</span>
             <br>
@@ -67,7 +67,13 @@
       activeIndex() {
         return this.$route.path;
       }
+    },
+    methods:{
+      personalCenter(){
+      this.$router.push({path:'/personalcenter'})
+      }
     }
+
   };
 </script>
 

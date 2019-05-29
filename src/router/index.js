@@ -8,7 +8,8 @@ import User from "@/views/user/User"
 import Student from "@/views/studentConnection/StudentConnection"
 import Partici from "@/views/particiPants/ParticiPants"
 import Advertising from "@/views/advertisingset/AdvertisingSet"
-
+import Personalcenter from "@/views/personalcenter"
+import Studentconnection from "@/views/StudentConnection/StudentConnection"
 
 Vue.use(Router)
 
@@ -68,8 +69,22 @@ export default new Router({
             requireAuth :true
           }
         },
-        
-       
+        {
+          name:'personalcenter',
+          path:'personalcenter',
+          component:Personalcenter,
+          meta:{
+            requireAuth :true
+          }
+        },
+        {
+          name:'studentconnection',
+          path:'studentconnection',
+          component:Studentconnection,
+          meta:{
+            requireAuth :true
+          }
+        }
       ]
     }
   ]
