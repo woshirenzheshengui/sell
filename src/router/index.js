@@ -33,25 +33,40 @@ export default new Router({
         {
           name:'Welcome',
           path:'welcome',
-          component:Welcome
+          component:Welcome,
+          meta:{
+            requireAuth :true
+          }
         },{
           name:'user',
           path:'user',
-          component:User
+          component:User,
+          meta:{
+            requireAuth :true
+          }
         },{
           name:'student',
           path:'student',
-          component:Student
+          component:Student,
+          meta:{
+            requireAuth :true
+          }
         },
         {
           name:'partici',
           path:'partici',
-          component:Partici
+          component:Partici,
+          meta:{
+            requireAuth :true
+          }
         },
         {
           name:'advertising',
           path:'advertising',
-          component:Advertising
+          component:Advertising,
+          meta:{
+            requireAuth :true
+          }
         },
         
        

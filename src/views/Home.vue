@@ -24,6 +24,19 @@
               <span >广告设置</span>
             </el-menu-item>
           </el-menu>
+          
+             <div class="box1 ">
+               <img src="../assets/未登录-头像.png" alt="">
+              
+             </div>
+              <span>
+                 您好
+               </span>
+             <div >
+            <div class="box2" >
+              <img src="../assets/开关 (1).png" alt="">
+            </div>
+          </div>
         </el-aside>
         <el-main>
         <router-view></router-view>
@@ -68,6 +81,7 @@ padding-left: 180px;
 }
  .el-aside {
     background-color: #545c64;
+    position: relative;
   }
 .el-header {
   background-color: rgb(89, 142, 202);
@@ -82,4 +96,26 @@ padding-left: 180px;
     width: 200px;
     min-height: 400px;
   }
+  .box2{
+    width: 100%;
+    display: flex;
+     justify-content:center;
+     position: absolute;
+     bottom: 50px;
+  }
+  .box2 img{
+    width: 30px;
+  height: 30px;
+}
+.box1{
+  width: 100%;
+    display: flex;
+     justify-content:center;
+     position: absolute;
+     bottom: 100px;
+}
+ .box1 img{
+    width: 40px;
+  height: 40px;
+}
 </style>

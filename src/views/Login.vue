@@ -1,107 +1,81 @@
 <template>
-  <!-- <div class="login">
-    <el-card class="login-form-layout">
-      <el-form autocomplete="on" :model="loginForm" ref="loginForm" label-position="left">
-        <h2 class="login-title color-main">艾丽思</h2>
-        <el-form-item prop="username">
-          <el-input
-            name="username"
-            type="text"
-            v-model="loginForm.username"
-            autocomplete="on"
-            placeholder="请输入用户名"
-          >
-            <span slot="prefix">
-              <svg-icon icon-class="user" class="color-main"></svg-icon>
-            </span>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="password">
-          <el-input
-            name="password"
-            :type="pwdType"
-            @keyup.enter.native="handleLogin"
-            v-model="loginForm.password"
-            autocomplete="on"
-            placeholder="请输入密码"
-          >
-            <span slot="prefix">
-              <svg-icon icon-class="password" class="color-main"></svg-icon>
-            </span>
-            <span slot="suffix" @click="showPwd">
-              <svg-icon icon-class="eye" class="color-main"></svg-icon>
-            </span>
-          </el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button
-            style="width: 100%"
-            type="primary"
-            :loading="loading"
-            @click.native.prevent="handleLogin"
-          >登录</el-button>
-        </el-form-item>
-        <el-form-item style="margin-bottom: 60px">
-          <el-button
-            style="width: 100%"
-            type="primary"
-            :loading="loading"
-            @click.native.prevent="handleLogin"
-          >退出</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-    <img src="../assets/QQ图片20190524112451.png" class="login-center-layout">
-  </div> -->
-   <div class="login">
+  <div class="login">
     <el-form ref="form" :model="form" class="container" :rules="rules">
       <el-form-item>
         <div class="avatar">
-          <img src="../assets/u=2495686343,2449783742&fm=26&gp=0.jpg" alt="">
+          <img src="../assets/u=2495686343,2449783742&fm=26&gp=0.jpg" alt>
         </div>
       </el-form-item>
       <el-form-item prop="username">
-        <el-input v-model="form.username" placeholder="账户" prefix-icon="myicon myicon-user"></el-input>
+        <el-input v-model="form.username" placeholder="账户" prefix-icon="myicon myicon-user" ></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="form.password" placeholder="密码" prefix-icon="myicon myicon-key" type="password"></el-input>
+        <el-input
+          v-model="form.password"
+          placeholder="密码"
+          prefix-icon="myicon myicon-key"
+          type="password"
+        ></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" class="login-btn" @click="loginSubmit('form')">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
-
 </template>
 <script>
+import {checkUser} from "@/api";
 export default {
   name: "login",
   data() {
-    // return {
-    //   loginForm: {
-    //     username: "admin",
-    //     password: "123"
-    //   }
-    // };
-      return {
+    return {
       form: {
-        username: '',
-        password: ''
+        username: "",
+        password: ""
       },
       rules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' }
+          { required: true, message: "请输入用户名", trigger: "blur" }
         ],
-        password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
-        ]
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       }
-    }
+    };
+  },
+  methods: {
+    loginSubmit(formName) {
+      this.$refs[formName].validate(valide => {
+        //校验通过才执行函数
+        // console.log('疏通')
+       if(valide){
+        //  console.log(checkUser)
+        checkUser(this.form).then(res=>{
+           console.log(res)
+         if(res.code===0){
+           sessionStorage.setItem('myid',res.data.id)
+           if(this.$route.query.redirect){
+             this.$router.push(this.$route.query.redirect)
+           }else{
+        this.$router.push({name:'Home'})
+           }
+           
+          //  console.log("登录成功")
+         }else{
+           this.$message({
+             type:'error',
+             message:res.msg
+           })
+         }
+        })
+        
+       }
+            //成功跳转至首页
+      
+    })
   }
-};
+  } 
+  }
 </script>
 <style lang="scss" scoped>
-
 .login {
   position: fixed;
   width: 100%;
@@ -129,9 +103,9 @@ export default {
       box-shadow: 0 1px 5px #ccc;
       overflow: hidden;
     }
-    .avatar img{
-width: 120px;
-height: 120px;
+    .avatar img {
+      width: 120px;
+      height: 120px;
     }
     .login-btn {
       width: 100%;
